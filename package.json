@@ -10,8 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ajs": "^1.3.4",
     "dotenv": "^16.0.3",
+    "ejs": "^5.0.1",
     "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
     "pg": "^8.8.0"
   },
   "devDependencies": {
