@@ -1,25 +1,28 @@
+/* Global */
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  padding: 0;
-  background-image: url("/images/site/checkerboard.jpg");
-  background-repeat: repeat;
+  font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
-  font-family: Arial, sans-serif;
+  background: white;
 }
 
 #wrapper {
-  background-color: white;
+  background: white;
   width: 95%;
   max-width: 1000px;
   margin: 20px 0;
-  border: 5px solid #20b2aa; 
+  border: 5px solid #20b2aa;
   padding: 0 20px;
-  box-sizing: border-box;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-/*Header*/
+/* HEADER */
+
 #top-header {
   display: flex;
   justify-content: space-between;
@@ -28,56 +31,60 @@ body {
 }
 
 .siteName a {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: bold;
-  color: #3a3a3e;
   text-decoration: none;
+  color: #333;
 }
 
 #tools a {
-  color: #3a3a3e;
   text-decoration: none;
+  color: #333;
   font-weight: bold;
-  text-transform: uppercase;
 }
 
-/*  Navigation */
+/* NAVIGATION */
+
 nav {
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  padding: 1rem;
+  background: black;
 }
 
 nav ul {
-  display: flex;
   list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
   margin: 0;
-  gap: 7rem;
-  padding: 0;
+  padding: 1rem;
 }
 
-nav ul li a {
+nav a {
   color: white;
   text-decoration: none;
-  font-weight: 500;
 }
 
-nav ul li a:hover {
+nav a:hover {
   text-decoration: underline;
 }
 
-/* Main Content */
+/* MAIN */
+
 main {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
+  padding: 20px 0;
 }
 
-/* Hero Section */
+main h1 {
+  margin-top: 0;
+}
+
+/* HERO */
+
 .hero-container {
-  position: relative;
   margin-bottom: 30px;
+}
+
+.hero-image {
+  position: relative;
 }
 
 .hero-image img {
@@ -88,45 +95,69 @@ main {
 
 .hero-text {
   position: absolute;
-  top: 20%;
+  top: 15%;
   left: 5%;
-  background-color: rgba(255, 255, 255, 0.7);
-  padding: 15px;
-  color: #00bfff;
-  max-width: 250px;
+  background: rgba(255,255,255,0.8);
+  padding: 10px;
+  max-width: 200px;
+  color: #009fd1;
 }
 
-.hero-text h2 { 
-  margin: 0; 
-  font-size: 1.8rem; 
+.hero-text h2 {
+  margin: 0;
+  font-size: 1.3rem;
 }
 
-.hero-text ul { 
-  list-style: none; 
-  padding: 0; 
-  margin: 10px 0; 
-  font-weight: bold; 
+.hero-text ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .hero-btn {
-  background-color: #00bfff;
-  border: 1px solid #333;
-  padding: 10px 20px;
-  font-size: 1.1rem;
+  background: #00bfff;
+  border: none;
+  padding: 8px 14px;
+  font-weight: bold;
   cursor: pointer;
 }
 
-/* Info Grid */
+/* INFO GRID */
+
 .info-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1fr;
+  gap: 30px;
 }
+
+/* REVIEWS FIRST ON MOBILE */
+
+.reviews {
+  order: 1;
+}
+
+.upgrades {
+  order: 2;
+}
+
+/* REVIEWS */
+
+.reviews ul {
+  padding-left: 20px;
+}
+
+.reviews li {
+  margin-bottom: 12px;
+}
+
+/* UPGRADES */
 
 .upgrade-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 15px;
 }
 
 .card {
@@ -135,43 +166,69 @@ main {
 
 .card a {
   display: block;
-  margin-top: 10px;
+  margin-top: 6px;
   font-weight: bold;
-  color: #333;
-  text-decoration: none;
 }
 
-.img-placeholder {
-  background-color: #00bfff;
+.img-box {
+  background: #00bfff;
   border: 1px solid #333;
-  padding: 10px;
-  height: 80px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.img-placeholder img { 
-  max-height: 100%; 
+.img-box img {
+  max-height: 80%;
 }
 
-.reviews ul {
-  padding-left: 20px;
-}
+/* FOOTER */
 
-.reviews li {
-  margin-bottom: 15px;
-  color: black;
-}
-
-/*Footer */
 footer {
   padding: 20px 0;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #ddd;
   text-align: center;
 }
 
-footer .copyright {
-  font-size: 0.9rem;
+footer p {
   margin: 0;
+  font-size: 0.9rem;
+}
+
+/* TABLET */
+
+@media (min-width: 700px) {
+
+  body {
+    background-image: url("/images/site/checkerboard.jpg");
+    background-repeat: repeat;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reviews {
+    order: 2;
+  }
+
+  .upgrades {
+    order: 1;
+  }
+
+}
+
+/* DESKTOP */
+
+@media (min-width: 1000px) {
+
+  nav ul {
+    gap: 4rem;
+  }
+
+  .hero-text {
+    max-width: 250px;
+  }
+
 }
