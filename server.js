@@ -10,6 +10,7 @@ const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
+const baseController = require("./controllers/baseController")
 
 /* ***********************
  * Routes
@@ -37,8 +38,6 @@ app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
 
-// index
-app.get("/", function(req, res){
-  res.render("index", {title: "Home"})
-})
+// index route
+app.get("/", baseController.buildHome)
 
