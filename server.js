@@ -15,17 +15,17 @@ const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/")
 
 /* ***********************
- * Routes
- *************************/
-app.use(static)
-app.use("/inv", inventoryRoute)
-
-/* ***********************
  * View Engine and Templates
  *************************/
 app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.set("layout", "./layouts/layout")
+
+/* ***********************
+ * Routes
+ *************************/
+app.use(static)
+app.use("/inv", inventoryRoute)
 
 /* ***********************
  * Local Server Information
