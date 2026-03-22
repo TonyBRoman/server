@@ -61,10 +61,16 @@ nav ul {
 nav a {
   color: white;
   text-decoration: none;
+  padding:  5pc 10px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: relative
 }
 
 nav a:hover {
-  text-decoration: underline;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #20b2aa;
+  text-decoration: none;
 }
 
 /* MAIN */
@@ -196,6 +202,13 @@ footer p {
   font-size: 0.9rem;
 }
 
+footer a {
+  text-decoration: none;
+  color: rgb(136, 16, 16);
+  font-weight: bold;
+}
+
+
 /* TABLET */
 
 @media (min-width: 600px) {
@@ -310,5 +323,122 @@ footer p {
 @media (min-width: 900px) {
     #inv-display {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Vehicle Detail View */
+#vehicle-detail-display {
+  display: flex;
+  flex-direction: column; 
+  gap: 20px;
+  align-items: center;
+}
+
+#vehicle-detail-display img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 10px;
+}
+
+#vehicle-info {
+  padding: 10px;
+}
+
+@media (min-width: 800px) {
+  #vehicle-detail-display {
+    flex-direction: row; 
+    align-items: flex-start;
+  }
+  
+  #vehicle-detail-display img {
+    width: 50%;
+  }
+}
+
+/* Error Paage */
+
+#error-container {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a1a1a; 
+    color: #ffffff;
+    border-radius: 12px;
+    border: 2px solid #333;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin: 40px auto;
+    max-width: 1000px; 
+}
+
+.fun-error {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+}
+
+.error-gif {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    border: 3px solid #f1c40f; 
+    box-shadow: 0 0 15px rgba(241, 196, 15, 0.4);
+}
+
+.error-text {
+    flex: 1;
+}
+
+.bat-status-report {
+    font-family: 'Courier New', Courier, monospace; 
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #cccccc;
+    text-align: left; 
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-left: 4px solid #f1c40f;
+    margin-bottom: 25px;
+}
+
+.bat-status-report strong {
+    color: #f1c40f;
+    text-transform: uppercase;
+}
+
+.return-home {
+    margin-top: 20px;
+}
+
+.return-home a {
+    display: inline-block;
+    color: #1a1a1a;
+    background-color: #f1c40f;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 12px 25px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.return-home a:hover {
+    background-color: #d4ac0d;
+    transform: scale(1.05);
+}
+
+@media (min-width: 850px) {
+    .fun-error {
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .error-gif {
+        max-width: 450px;
     }
 }

@@ -2,6 +2,7 @@
  * This server.js file is the primary file of the 
  * application. It is used to control the project.
  *******************************************/
+
 /* ***********************
  * Require Statements
  *************************/
@@ -34,35 +35,48 @@ app.use("/inv", inventoryRoute)
 const port = process.env.PORT
 const host = process.env.HOST
 
-// index route
+// Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
 
-/* 404 handler */
+// Intentional Error Route
+app.get("/footer-error", utilities.handleErrors(baseController.triggerError))
+
+/* ***********************
+ * 404 Handler (Generic Page Not Found)
+ * This catches random mistyped URLs
+ * *************************/
 app.use(async (req, res, next) => {
   let nav = await utilities.getNav()
   res.status(404).render("errors/error", {
-    title: "404 - Page Not Found",
-    message: "Sorry, the page you are looking for does not exist.",
+    title: "SIGNAL LOST IN GOTHAM",
+    message: "Detective, the coordinates you entered do not exist in our database. Even the Bat-Computer can't find what isn't there.",
     nav
   })
 })
 
 /* ***********************
-* Express Error Handler
-* Place after all other middleware
-*************************/
+ * Express Error Handler
+ * This catches errors passed by next() or thrown by handleErrors
+ * *************************/
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+  
   let message
+  let title
+
+  // Logic to differentiate Batman messages based on error status
   if (err.status == 404) {
-    message = err.message
+    title = "COORDINATES UNKNOWN";
+    message = "Target location not found. It seems Joker has scrubbed these files from the system.";
   } else {
-    message = 'Oh no, There was a crash. Maybe try a different route?'
+    title = "SYSTEM OVERLOAD";
+    message = "The Bat-Computer is malfunctioning! Stand back while Batman performs some... 'emergency maintenance' on the hardware.";
   }
+
   res.render("errors/error", {
-    title: err.status || 'Server Error',
-    message,
+    title: title, 
+    message: message,
     nav
   })
 })
@@ -73,5 +87,3 @@ app.use(async (err, req, res, next) => {
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
-
-

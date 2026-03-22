@@ -1,3 +1,19 @@
 <h1><%= title %></h1>
-<p><%- message %></p>
-<p>Don't worry, even the best explorers get lost sometimes. 🚙</p>
+
+<div id="error-container">
+    <div class="fun-error">
+        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDM5cGI0YzhhdThidDlzNTA2djY4b25xd2p4cGxiazlmb2F0bzFmaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3v7ouNLKKfUuxs7LA5/giphy.gif" 
+             alt="Bat-Computer Maintenance" 
+             class="error-gif">
+        
+        <div class="error-text">
+            <div class="bat-status-report">
+                <%- message %>
+            </div>
+            
+            <p class="return-home">
+                <a href="/">Return to safe zone (Home)</a>
+            </p>
+        </div>
+    </div>
+</div>
