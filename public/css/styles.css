@@ -614,3 +614,25 @@ footer a {
 .login-link a:hover {
   color: #178f8a;
 }
+
+input:required:invalid, input:focus:invalid {
+  border-color: #d10000;
+  background-color: #ffe6e6;
+}
+
+input:required:valid {
+  border-color: #20b2aa;
+  background-color: #e6fffa;
+}
+
+.password-hint {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.85rem;
+  color: #555;
+  font-style: italic;
+  background-color: #f9f9f9;
+  padding: 6px 10px;
+  border-left: 3px solid #20b2aa;
+  border-radius: 4px;
+}
