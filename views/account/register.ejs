@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+</head>
+<body>
+  <main>
+    <h1 class="register-title"><%= title %></h1>
+    <%- messages() %>
+
+    <form class="register-form" action="/account/register" method="post">
+      <div class="form-group floating-label">
+        <input type="text" id="account_firstname" name="account_firstname" placeholder=" " required>
+        <label for="account_firstname">First Name</label>
+      </div>
+
+      <div class="form-group floating-label">
+        <input type="text" id="account_lastname" name="account_lastname" placeholder=" " required>
+        <label for="account_lastname">Last Name</label>
+      </div>
+
+      <div class="form-group floating-label">
+        <input type="email" id="account_email" name="account_email" placeholder=" " required>
+        <label for="account_email">Email</label>
+      </div>
+
+      <div class="form-group floating-label">
+        <input type="password" id="account_password" name="account_password" placeholder=" " required>
+        <label for="account_password">Password</label>
+      </div>
+
+      <button type="submit" class="btn-register">Register</button>
+    </form>
+
+    <p class="login-link">Already registered? <a href="/account/login">Login</a></p>
+  </main>
+</body>
+</html>
