@@ -5,7 +5,7 @@ const accountController = require("../controllers/accountController")
 
 router.get("/login", accountController.buildLogin)
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
-
+router.post('/register', utilities.handleErrors(accountController.registerAccount))
 
 // Error handling
 router.use(function (err, req, res, next) {
