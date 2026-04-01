@@ -636,3 +636,17 @@ input:required:valid {
   border-left: 3px solid #20b2aa;
   border-radius: 4px;
 }
+
+.notice {
+  background-color: #ffe6e6;
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  list-style-type: disc;
+}
+
+.notice li {
+  margin-left: 20px;
+}

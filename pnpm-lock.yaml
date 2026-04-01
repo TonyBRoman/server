@@ -38,6 +38,9 @@ importers:
       express-session:
         specifier: ^1.19.0
         version: 1.19.0
+      express-validator:
+        specifier: ^7.3.1
+        version: 7.3.1
       pg:
         specifier: ^8.8.0
         version: 8.20.0
@@ -247,6 +250,10 @@ packages:
     resolution: {integrity: sha512-0csaMkGq+vaiZTmSMMGkfdCOabYv192VbytFypcvI0MANrp+4i/7yEkJ0sbAEhycQjntaKGzYfjfXQyVb7BHMA==}
     engines: {node: '>= 0.8.0'}
 
+  express-validator@7.3.1:
+    resolution: {integrity: sha512-IGenaSf+DnWc69lKuqlRE9/i/2t5/16VpH5bXoqdxWz1aCpRvEdrBuu1y95i/iL5QP8ZYVATiwLFhwk3EDl5vg==}
+    engines: {node: '>= 8.0.0'}
+
   express@4.22.1:
     resolution: {integrity: sha512-F2X8g9P1X7uCPZMA3MVf9wcTqlyNp7IhH5qPCI0izhaOIYXaW9L535tGA3qmjRzpH+bZczqq7hVKxTR4NWnu+g==}
     engines: {node: '>= 0.10.0'}
@@ -384,6 +391,9 @@ packages:
 
   le-table@6.1.11:
     resolution: {integrity: sha512-398j3kZd/kyI6CwYo5+fa43+rHpX/XUzfkyRjatojjbmQfo4AP0spd3HzJuLFWBXXas4DyLavnfdCeLvh+59KQ==}
+
+  lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
 
   match-it@1.0.10:
     resolution: {integrity: sha512-twa4uWRhjEOkjj5LpR2lc5sr5x6jSX9QU5f1IfU9fSY/cxn06NRMea58ggfWGoAU1iNSWwM5CLnNTYwjcNqgOw==}
@@ -699,6 +709,10 @@ packages:
     resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
 
+  validator@13.15.26:
+    resolution: {integrity: sha512-spH26xU080ydGggxRyR1Yhcbgx+j3y5jbNXk/8L+iRvdIEQ4uTRH2Sgf2dokud6Q4oAtsbNvJ1Ft+9xmm6IZcA==}
+    engines: {node: '>= 0.10'}
+
   vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
@@ -945,6 +959,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  express-validator@7.3.1:
+    dependencies:
+      lodash: 4.17.21
+      validator: 13.15.26
+
   express@4.22.1:
     dependencies:
       accepts: 1.3.8
@@ -1110,6 +1129,8 @@ snapshots:
       cli-box: 6.0.11
       overlap: 2.2.11
       ul: 5.2.16
+
+  lodash@4.17.21: {}
 
   match-it@1.0.10: {}
 
@@ -1439,6 +1460,8 @@ snapshots:
   unpipe@1.0.0: {}
 
   utils-merge@1.0.1: {}
+
+  validator@13.15.26: {}
 
   vary@1.1.2: {}
 
