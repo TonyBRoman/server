@@ -1,7 +1,7 @@
+const util = require("ajs/lib/util")
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
 
-// 1. Usamos un nombre consistente: invController
 const invController = {}
 
 /* ***************************
@@ -54,6 +54,94 @@ invController.buildByInventoryId = async function (req, res, next) {
     next(error)
   }
 }
+
+/* ***************************
+ * Build inventory management view
+ * ************************** */
+invController.buildManagement = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/management", {
+    title: "Inventory Management",
+    nav,
+    notice: req.flash("notice")
+  })
+}
+
+invController.buildAddClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/add-classification", {
+    title: "Add New Classification", 
+    nav, 
+    notice: req.flash("notice"), 
+    errors: null
+  })
+}
+
+invController.addClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const { classification_name } = req.body
+
+  try {
+    const result = await invModel.addClassification(classification_name)
+    if (result) {
+      req.flash("notice", `Classification "${classification_name}" added successfully.`)
+      res.redirect("/inv/")
+    }
+  } catch (error) {
+    req.flash("notice", "Sorry, adding the classification failed.")
+    res.status(500).render("inventory/add-classification", {
+      title: "Add New Classification", 
+      nav, 
+      notice: req.flash("notice"), 
+      errors: null
+    })
+  }
+}
+
+invController.buildAddInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const classificationSelect = await utilities.buildClassificationList()
+  res.render("inventory/add-inventory", {
+    title: "Add New Inventory",
+    nav,
+    classificationSelect,
+    notice: req.flash("notice"),
+    errors: null
+  })
+}
+
+invController.addInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    classification_id, inv_make, inv_model, inv_year,
+    inv_description, inv_image, inv_thumbnail,
+    inv_price, inv_miles, inv_color
+  } = req.body
+
+  try {
+    const result = await invModel.addInventory(
+      classification_id, inv_make, inv_model, inv_year,
+      inv_description, inv_image, inv_thumbnail,
+      inv_price, inv_miles, inv_color
+    )
+
+    if (result) {
+      req.flash("notice", `Vehicle "${inv_make} ${inv_model}" added successfully.`)
+      res.redirect("/inv/")
+    }
+  } catch (error) {
+    req.flash("notice", "Sorry, adding the vehicle failed.")
+    const classificationSelect = await utilities.buildClassificationList(classification_id)
+    res.status(500).render("inventory/add-inventory", {
+      title: "Add New Inventory",
+      nav,
+      classificationSelect,
+      notice: req.flash("notice"),
+      errors: null
+    })
+  }
+}
+
 
 // 2. Exportamos el nombre correcto
 module.exports = invController

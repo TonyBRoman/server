@@ -1,0 +1,13 @@
+<h1>Add New Classification</h1>
+
+
+<% if (typeof notice !== 'undefined') { %>
+  <div class="flash-message"><%= notice %></div>
+<% } %>
+
+<form action="/inv/add-classification" method="post">
+  <label for="classification_name">Classification Name:</label>
+  <input type="text" id="classification_name" name="classification_name" required>
+  
+  <button type="submit">Add Classification</button>
+</form>

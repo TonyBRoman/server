@@ -32,6 +32,7 @@ const bodyParser = require("body-parser")
   saveUninitialized: true,
   name: 'sessionId',
 }))
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true}))
 
