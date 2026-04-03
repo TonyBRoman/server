@@ -1,11 +1,11 @@
 
-<h1>Add New Inventory</h1>
+<h1 class="title">Add New Inventory</h1>
 
 <% if (typeof notice !== 'undefined') { %>
   <div class="flash-message"><%= notice %></div>
 <% } %>
 
-<form action="/inv/add-inventory" method="post">
+<form class="inventory-form" action="/inv/add-inventory" method="post">
   <label for="classification_id">Classification:</label>
   <%- classificationSelect %>
 

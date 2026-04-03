@@ -47,6 +47,8 @@ body {
 
 nav {
   background: black;
+  overflow-x:auto;
+  white-space: nowrap;
 }
 
 nav ul {
@@ -58,10 +60,14 @@ nav ul {
   padding: 1rem;
 }
 
+nav li {
+  flex: 0 0 auto;
+}
+
 nav a {
   color: white;
   text-decoration: none;
-  padding:  5pc 10px;
+  padding:  5px 10px;
   border-radius: 4px;
   transition: all 0.3s ease;
   position: relative
@@ -443,8 +449,8 @@ footer a {
     }
 }
 
-/* Login Title */
-.login-title {
+/* Title */
+.title {
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
@@ -454,7 +460,7 @@ footer a {
   transition: color 0.3s ease;
 }
 
-.login-title:hover {
+.title:hover {
   color: #178f8a;
 }
 
@@ -547,21 +553,6 @@ footer a {
   color: #178f8a;
 }
 
-/* Register Title */
-.register-title {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #20b2aa;
-  margin-bottom: 1.5rem;
-  letter-spacing: 1px;
-  transition: color 0.3s ease;
-}
-
-.register-title:hover {
-  color: #178f8a;
-}
-
 /* Register Form */
 .register-form {
   max-width: 400px;
@@ -638,9 +629,8 @@ input:required:valid {
 }
 
 .notice {
-  background-color: #ffe6e6;
-  border: 1px solid #e74c3c;
-  color: #e74c3c;
+  background-color: #e7e6ff;
+  color: #3c86e7;
   padding: 10px;
   margin-bottom: 15px;
   border-radius: 4px;
@@ -648,5 +638,197 @@ input:required:valid {
 }
 
 .notice li {
-  margin-left: 20px;
+  margin-left: auto;
+  list-style-type: none;
+}
+
+/* Inventory Management Page */
+.management-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.management-container h1 {
+  font-size: 2rem;
+  color: #20b2aa;
+  margin-bottom: 1.5rem;
+}
+
+.management-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.management-links a {
+  display: block;
+  padding: 0.9rem;
+  background: #20b2aa;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.management-links a:hover {
+  background: #178f8a;
+  transform: scale(1.02);
+}
+
+@media (min-width: 600px) {
+  .management-links {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* Classification Form */
+.classification-form {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.classification-form label {
+  font-weight: bold;
+  color: #333;
+}
+
+.classification-form small {
+  color: #777;
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.classification-form input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.classification-form input:focus {
+  border-color: #20b2aa;
+  outline: none;
+  background-color: #e6fffa;
+}
+
+.classification-form button {
+  padding: 0.9rem;
+  background: #20b2aa;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.classification-form button:hover {
+  background: #178f8a;
+  transform: scale(1.02);
+}
+
+/* Inventory Forms */
+.inventory-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.inventory-form label {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.3rem;
+}
+
+.inventory-form input,
+.inventory-form textarea,
+.inventory-form select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.inventory-form input:focus,
+.inventory-form textarea:focus,
+.inventory-form select:focus {
+  border-color: #20b2aa;
+  outline: none;
+  background-color: #e6fffa;
+}
+
+.inventory-form button {
+  padding: 0.9rem;
+  background: #20b2aa;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.inventory-form button:hover {
+  background: #178f8a;
+  transform: scale(1.02);
+}
+
+/* Responsive tweaks */
+@media (min-width: 700px) {
+  .inventory-form {
+    padding: 3rem;
+  }
+}
+
+/* Flash Messages */
+.flash-message {
+  padding: 1rem;
+  margin: 1rem auto;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  max-width: 600px;
+  animation: fadeIn 0.5s ease;
+}
+
+
+/* Info message */
+.flash-message.info {
+  background-color: #f0f8ff;
+  border: 2px solid #00bfff;
+  color: #006699;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
