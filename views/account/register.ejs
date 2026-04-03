@@ -19,24 +19,25 @@
 
     <form class="register-form" action="/account/register" method="post">
       <div class="form-group floating-label">
-        <input type="text" id="account_firstname" name="account_firstname" placeholder=" " required>
+        <input type="text" id="account_firstname" name="account_firstname" placeholder=" " value="<%= locals.account_firstname %>">
         <label for="account_firstname">First Name</label>
       </div>
 
       <div class="form-group floating-label">
-        <input type="text" id="account_lastname" name="account_lastname" placeholder=" " required>
+        <input type="text" id="account_lastname" name="account_lastname" placeholder=" " value="<%= locals.account_lastname %>">
         <label for="account_lastname">Last Name</label>
       </div>
 
       <div class="form-group floating-label">
-        <input type="email" id="account_email" name="account_email" placeholder=" " required>
+        <input type="email" id="account_email" name="account_email" placeholder=" " value="<%= locals.account_email %>">
         <label for="account_email">Email</label>
       </div>
 
       <div class="form-group floating-label">
-        <input type="password" id="account_password" name="account_password" placeholder=" " required minlength="8" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$">
+        <input type="password" id="account_password" name="account_password" placeholder=" ">
         <label for="account_password">Password</label>
       </div>
+
         <small class="password-hint">
             Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character
         </small>
