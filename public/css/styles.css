@@ -832,3 +832,77 @@ input:required:valid {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Account Management Page */
+.account-management {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.account-management h1 {
+  font-size: 2rem;
+  color: #20b2aa;
+  margin-bottom: 1.5rem;
+}
+
+.account-management p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+/* Flash messages */
+.flash-message.success {
+  background-color: #e6ffed;
+  border: 2px solid #20b2aa;
+  color: #178f8a;
+}
+
+.flash-message.error {
+  background-color: #ffe6e6;
+  border: 2px solid #d10000;
+  color: #b32d2d;
+}
+
+/* Action buttons */
+.account-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.account-actions a,
+.account-actions button {
+  padding: 0.9rem 1.4rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.account-actions a {
+  background: #20b2aa;
+  color: #fff;
+  text-decoration: none;
+}
+
+.account-actions a:hover {
+  background: #178f8a;
+  transform: scale(1.02);
+}
+
+.account-actions button {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.account-actions button:hover {
+  background: #ddd;
+  transform: scale(1.02);
+}

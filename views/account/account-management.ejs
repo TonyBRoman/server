@@ -1,0 +1,18 @@
+<main class="account-management">
+  <h1>Account Management</h1>
+
+  <% if (typeof success !== 'undefined') { %>
+    <div class="flash-message success"><%= success %></div>
+  <% } %>
+
+  <% if (typeof error !== 'undefined') { %>
+    <div class="flash-message error"><%= error %></div>
+  <% } %>
+
+  <p>You're logged in</p>
+
+  <div class="account-actions">
+    <a href="/account/update">Update Info</a>
+    <button onclick="window.location.href='/account/logout'">Logout</button>
+  </div>
+</main>
