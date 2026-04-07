@@ -9,7 +9,7 @@ router.get("/login", accountController.buildLogin)
 // Register View
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 // Defauult account management view
-router.get("/", utilities.handleErrors(accountController.buildAccountManagement))
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement))
 
 // Process the registration data
 router.post(
