@@ -1,0 +1,21 @@
+
+<h1 class="title">Delete Inventory</h1>
+
+<% if (typeof notice !== 'undefined') { %>
+  <div class="notice"><%= notice %></div>
+<% } %>
+
+<p class="delete-intro">Confirm deletion of the following vehicle:</p>
+
+<div class="delete-confirmation">
+  <h2><%= inv_make %> <%= inv_model %> (Year: <%= inv_year %>)</h2>
+  <p>Price: $<%= new Intl.NumberFormat("en-US").format(inv_price) %></p>
+  <p>Color: <%= inv_color %></p>
+  <p>Description: <%= inv_description %></p>
+</div>
+
+
+<form action="/inv/delete" method="post">
+  <input type="hidden" name="inv_id" value="<%= inv_id %>">
+  <button type="submit" class="delete-btn">Delete Vehicle</button>
+</form>

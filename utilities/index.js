@@ -2,7 +2,7 @@ require("dotenv").config()
 const jwt = require("jsonwebtoken")
 const invModel = require("../models/inventory-model")
 const Util = {}
-
+const { body, validationResult } = require("express-validator")
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -165,6 +165,79 @@ Util.checkJWTToken = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+
+ /* ************************
+ * Inventory Update Validation Rules
+ ************************** */
+Util.updateInventoryRules = () => {
+  return [
+    body("inv_make")
+      .trim()
+      .isLength({ min: 3 })
+      .withMessage("Make must be at least 3 characters."),
+
+    body("inv_model")
+      .trim()
+      .isLength({ min: 3 })
+      .withMessage("Model must be at least 3 characters."),
+
+    body("inv_year")
+      .isInt({ min: 1900, max: 2100 })
+      .withMessage("Enter a valid year."),
+
+    body("inv_description")
+      .trim()
+      .isLength({ min: 10 })
+      .withMessage("Description must be at least 10 characters."),
+
+    body("inv_image")
+      .trim()
+      .notEmpty()
+      .withMessage("Image path is required."),
+
+    body("inv_thumbnail")
+      .trim()
+      .notEmpty()
+      .withMessage("Thumbnail path is required."),
+
+    body("inv_price")
+      .isFloat({ min: 0 })
+      .withMessage("Price must be a positive number."),
+
+    body("inv_miles")
+      .isInt({ min: 0 })
+      .withMessage("Miles must be a positive number."),
+
+    body("inv_color")
+      .trim()
+      .notEmpty()
+      .withMessage("Color is required.")
+  ]
+}
+
+/* ************************
+ * Check data and return errors for updating inventory
+ ************************** */
+Util.checkUpdateData = async (req, res, next) => {
+  const errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    let nav = await Util.getNav()
+    const classificationSelect = await Util.buildClassificationList(req.body.classification_id)
+    const itemName = `${req.body.inv_make} ${req.body.inv_model}`
+
+    return res.render("inventory/edit-inventory", {
+      title: "Edit " + itemName,
+      nav,
+      classificationSelect,
+      errors: errors.array(),
+      ...req.body
+    })
+  }
+
+  next()
+}
+
 
 
 module.exports = Util
