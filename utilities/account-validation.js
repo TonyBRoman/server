@@ -148,7 +148,7 @@ validate.checkUpdateData = async (req, res, next) => {
       account_firstname,
       account_lastname,
       account_email,
-      accountData
+      accountData: { account_id, account_firstname, account_lastname, account_email }
     })
     return
   }

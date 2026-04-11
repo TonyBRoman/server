@@ -224,6 +224,8 @@ async function changePassword(req, res) {
  * *************************************** */
 async function accountLogout(req, res) {
   res.clearCookie("jwt")
+  res.cookie("jwt", "", { maxAge: 1 })
+  req.flash("notice", "You have been logged out.")
   res.redirect("/")
 }
 
