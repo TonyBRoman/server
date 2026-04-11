@@ -1,18 +1,26 @@
 <main class="account-management">
   <h1>Account Management</h1>
 
-  <% if (typeof success !== 'undefined') { %>
-    <div class="flash-message success"><%= success %></div>
-  <% } %>
+  <%- messages() %>
 
-  <% if (typeof error !== 'undefined') { %>
-    <div class="flash-message error"><%= error %></div>
-  <% } %>
-
+  <h2>Welcome <%= accountData.account_firstname %></h2>
+  
   <p>You're logged in</p>
 
-  <div class="account-actions">
-    <a href="/account/update">Update Info</a>
-    <button onclick="window.location.href='/account/logout'">Logout</button>
-  </div>
+  <section class="account-update">
+    <p>
+      <a href="/account/update/<%= accountData.account_id %>" title="Click to update account information">
+        Update Account Information
+      </a>
+    </p>
+  </section>
+
+  <% if (accountData.account_type === "Employee" || accountData.account_type === "Admin") { %>
+    <section class="inventory-management">
+      <h3>Inventory Management</h3>
+      <p>
+        <a href="/inv" title="Click to manage inventory">Manage Inventory</a>
+      </p>
+    </section>
+  <% } %>
 </main>

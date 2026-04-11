@@ -38,10 +38,16 @@ body {
 }
 
 #tools a {
+  margin-left: 1rem;
+  font-weight: 500;
+  color: #008080;
   text-decoration: none;
-  color: #333;
-  font-weight: bold;
 }
+
+#tools a:hover {
+  text-decoration: underline;
+}
+
 
 /* NAVIGATION */
 
@@ -1064,3 +1070,119 @@ input:required:valid {
   background-color: #b32d2d;
 }
 
+.inventory-management, .account-update {
+  margin-top: 1.5rem;
+}
+
+.inventory-management h3 {
+  margin-top: 0;
+  color: teal;
+}
+
+.inventory-management a, .account-update a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #008080;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.inventory-management a:hover, .account-update a:hover {
+  text-decoration: underline;
+}
+
+
+.account-actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.account-actions a,
+.account-actions button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.account-actions a {
+  background-color: teal;
+  color: white;
+}
+
+.account-actions a:hover {
+  background-color: #006666;
+}
+
+.account-actions button {
+  background-color: #ccc;
+  color: #333;
+}
+
+.account-actions button:hover {
+  background-color: #aaa;
+}
+
+.account-update form {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+}
+
+.account-update label {
+  display: block;
+  margin-top: 0.8rem;
+  font-weight: 500;
+}
+
+.account-update input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.account-update button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: teal;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.account-update button:hover {
+  background-color: #006666;
+}
+
+.account-update-view h2 {
+  color: #333;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #20b2aa;
+  padding-bottom: 5px;
+}
+
+.update-section {
+  margin-bottom: 3rem; 
+}
+
+.register-form .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #444;
+}
+
+.register-form .form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
