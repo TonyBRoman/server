@@ -1,0 +1,34 @@
+<main class="wishlist-view">
+  <h1><%= title %></h1>
+
+  <%- messages() %>
+
+  <% if (data && data.length > 0) { %>
+    <ul id="inv-display"> 
+      <% data.forEach(vehicle => { %>
+        <li>
+          <a href="/inv/detail/<%= vehicle.inv_id %>" title="View <%= vehicle.inv_make %> <%= vehicle.inv_model %> details">
+            <img src="<%= vehicle.inv_image %>" alt="Image of <%= vehicle.inv_make %> <%= vehicle.inv_model %>">
+          </a>
+          <div class="namePrice">
+            <hr />
+            <h2>
+              <a href="/inv/detail/<%= vehicle.inv_id %>" title="View details">
+                <%= vehicle.inv_make %> <%= vehicle.inv_model %>
+              </a>
+            </h2>
+            <span>$<%= new Intl.NumberFormat('en-US').format(vehicle.inv_price) %></span>
+
+            <form action="/account/wishlist/remove" method="post" class="remove-wishlist-form">
+              <input type="hidden" name="wishlist_id" value="<%= vehicle.wishlist_id %>">
+              <button type="submit" class="btn-remove">🗑️ Remove from Garage</button>
+            </form>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p class="notice">Your garage is empty. Go find some cars you love!</p>
+    <p class="return-home"><a href="/">Back to Home</a></p>
+  <% } %>
+</main>

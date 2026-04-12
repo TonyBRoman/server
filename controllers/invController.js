@@ -39,7 +39,11 @@ invController.buildByInventoryId = async function (req, res, next) {
       return next({status: 404, message: "Vehicle not found."})
     }
 
-    const grid = await utilities.buildVehicleDetailGrid(data)
+    const loggedin = res.locals.loggedin 
+    const account_id = res.locals.accountData ? res.locals.accountData.account_id : null
+    
+    const grid = await utilities.buildVehicleDetailGrid(data, loggedin, account_id)
+
     const nav = await utilities.getNav()
     const vehicleName = `${data.inv_make} ${data.inv_model}`
     

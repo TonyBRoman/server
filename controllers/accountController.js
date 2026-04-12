@@ -3,6 +3,7 @@ const utilities = require("../utilities/")
 const accountModel = require("../models/account-model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const wishListModel = require("../models/wishlist-model")
 
 /* ****************************************
 * Deliver login view
@@ -229,6 +230,60 @@ async function accountLogout(req, res) {
   res.redirect("/")
 }
 
+/* ****************************************
+ * Process Add to Wishlist
+ * *************************************** */
+async function addFavorite(req, res) {
+  const { inv_id, account_id } = req.body
+  
+  const result = await wishListModel.addFavorite(account_id, inv_id)
+
+  if (result === "duplicate") {
+    req.flash("notice", "This vehicle is already in your garage! 🚗")
+    return res.redirect("/account/wishlist")
+  } 
+  
+  if (typeof result === 'object') {
+    req.flash("notice", "Vehicle successfully added to your garage! ⭐")
+    return res.redirect("/account/wishlist")
+  } else {
+    req.flash("notice", "Sorry, there was an error adding the vehicle.")
+    return res.redirect("/inv/detail/" + inv_id)
+  }
+}
+
+/* ****************************************
+ * Deliver Wishlist View
+ * *************************************** */
+async function buildWishlistView(req, res, next) {
+  let nav = await utilities.getNav()
+  const account_id = res.locals.accountData.account_id
+  const data = await wishListModel.getWishlistByAccountId(account_id)
+  
+  res.render("account/wishlist", {
+    title: "My Garage",
+    nav,
+    errors: null,
+    data, 
+  })
+}
+
+/* ****************************************
+ * Process Remove from Wishlist (POST)
+ * *************************************** */
+async function removeFavorite(req, res) {
+  const { wishlist_id } = req.body
+  const result = await wishListModel.removeFavorite(wishlist_id)
+
+  if (result) {
+    req.flash("notice", "Vehicle removed from your garage.")
+  } else {
+    req.flash("notice", "Sorry, the removal failed.")
+  }
+  res.redirect("/account/wishlist")
+}
+
+
 module.exports = { 
   buildLogin, 
   buildRegister, 
@@ -238,5 +293,8 @@ module.exports = {
   buildUpdateView, 
   updateAccount, 
   changePassword, 
-  accountLogout
+  accountLogout, 
+  addFavorite,
+  buildWishlistView, 
+  removeFavorite 
 }

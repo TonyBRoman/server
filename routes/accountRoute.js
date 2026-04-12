@@ -60,5 +60,12 @@ router.use(function (err, req, res, next) {
 })
 
 router.get("/logout", accountController.accountLogout)
+// Add to wishlist
+router.post("/wishlist/add", utilities.checkLogin, utilities.handleErrors(accountController.addFavorite))
+
+// View wishlist
+router.get("/wishlist", utilities.checkLogin, utilities.handleErrors(accountController.buildWishlistView))
+
+router.post("/wishlist/remove", utilities.checkLogin, utilities.handleErrors(accountController.removeFavorite))
 
 module.exports = router

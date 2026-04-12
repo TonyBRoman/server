@@ -105,7 +105,7 @@ Util.buildClassificationGrid = function (data) {
 /* ************************
  * Builds the vehicle detail view HTML
  * ************************** */
-Util.buildVehicleDetailGrid = async function(data) {
+Util.buildVehicleDetailGrid = async function(data, loggedin = false, account_id = null) {
   let display
   if (data) {
     display = '<section id="vehicle-detail-display">'
@@ -116,6 +116,18 @@ Util.buildVehicleDetailGrid = async function(data) {
     display += '<p><strong>Description:</strong> ' + data.inv_description + '</p>'
     display += '<p><strong>Color:</strong> ' + data.inv_color + '</p>'
     display += '<p><strong>Miles:</strong> ' + new Intl.NumberFormat('en-US').format(data.inv_miles) + '</p>'
+
+    display += '<div class="wishlist-controls">'
+    if (loggedin) {
+      display += '<form action="/account/wishlist/add" method="post">'
+      display += '<input type="hidden" name="inv_id" value="' + data.inv_id + '">'
+      display += '<input type="hidden" name="account_id" value="' + account_id + '">'
+      display += '<button type="submit" class="btn-wishlist">⭐ Add to My Garage</button>'
+      display += '</form>'
+    } else {
+      display += '<p class="login-hint"><a href="/account/login">Log in</a> to add this vehicle to your garage!</p>'
+    }
+    display += '</div>'
     display += '</div>'
     display += '</section>'
   } else {

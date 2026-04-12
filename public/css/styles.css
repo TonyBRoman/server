@@ -1186,3 +1186,55 @@ input:required:valid {
   border: 1px solid #ddd;
   border-radius: 8px;
 }
+
+.wishlist-controls {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f0fdfa; /* Un verde muy clarito */
+  border-radius: 8px;
+  border-left: 5px solid #20b2aa;
+}
+
+.btn-wishlist {
+  background-color: #20b2aa;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.btn-wishlist:hover {
+  background-color: #178f8a;
+  transform: scale(1.05);
+}
+
+.login-hint a {
+  color: #20b2aa;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.remove-wishlist-form {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.btn-remove {
+  background-color: #e3342f; 
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.btn-remove:hover {
+  background-color: #cc1f1a;
+}

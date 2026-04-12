@@ -247,3 +247,14 @@ WHERE inv_make = 'GM' AND inv_model = 'Hummer';
 UPDATE public.inventory
 SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
     inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
+
+-- Create a wish list table 
+CREATE TABLE IF NOT EXISTS public.wishlist (
+    wishlist_id SERIAL PRIMARY KEY,
+    account_id INT NOT NULL,
+    inv_id INT NOT NULL,
+    wishlist_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_account FOREIGN KEY (account_id) REFERENCES public.account (account_id) ON DELETE CASCADE,
+    CONSTRAINT fk_inventory FOREIGN KEY (inv_id) REFERENCES public.inventory (inv_id) ON DELETE CASCADE,
+    CONSTRAINT unique_wishlist UNIQUE (account_id, inv_id)
+);
