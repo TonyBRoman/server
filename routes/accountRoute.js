@@ -59,23 +59,31 @@ router.use(function (err, req, res, next) {
   res.status(500).send("Something broke!")
 })
 
+// Process logout
 router.get("/logout", accountController.accountLogout)
-// Add to wishlist
+
+// Add vehicle to wishlist
 router.post("/wishlist/add", utilities.checkLogin, utilities.handleErrors(accountController.addFavorite))
 
-// View wishlist
+// View user wishlist
 router.get("/wishlist", utilities.checkLogin, utilities.handleErrors(accountController.buildWishlistView))
 
+// Remove vehicle from wishlist
 router.post("/wishlist/remove", utilities.checkLogin, utilities.handleErrors(accountController.removeFavorite))
 
+// Deliver staff registration view
 router.get("/admin-register", utilities.checkLogin, utilities.handleErrors(accountController.buildAdminRegister))
 
+// Deliver user management search view
 router.get("/manage-users", utilities.checkLogin, utilities.handleErrors(accountController.buildManageUsers))
 
+// Process search user by email
 router.post("/manage-users/search", utilities.checkLogin, utilities.handleErrors(accountController.searchTextUser))
 
+// Process account type update
 router.post("/update-role", utilities.checkLogin, utilities.handleErrors(accountController.updateAccountType))
 
+// Process administrative password reset
 router.post("/admin-reset-password", utilities.checkLogin, utilities.handleErrors(accountController.adminResetPassword))
 
 module.exports = router
