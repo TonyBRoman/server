@@ -76,4 +76,6 @@ router.post("/manage-users/search", utilities.checkLogin, utilities.handleErrors
 
 router.post("/update-role", utilities.checkLogin, utilities.handleErrors(accountController.updateAccountType))
 
+router.post("/admin-reset-password", utilities.checkLogin, utilities.handleErrors(accountController.adminResetPassword))
+
 module.exports = router

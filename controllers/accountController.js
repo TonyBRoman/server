@@ -369,6 +369,27 @@ async function updateAccountType(req, res) {
   }
 }
 
+/* ****************************************
+ * Admin Reset Password (POST)
+ * *************************************** */
+async function adminResetPassword(req, res) {
+  const { account_id } = req.body
+  const temporaryPassword = "Password123!" 
+
+  const userData = await accountModel.getAccountById(account_id)
+  
+  let hashedPassword = await bcrypt.hash(temporaryPassword, 10)
+  const result = await accountModel.updatePassword(hashedPassword, account_id)
+
+  if (result) {
+    req.flash("notice", `Success! Please tell ${userData.account_firstname} to use the temporary password: ${temporaryPassword} and change it immediately.`)
+    res.redirect("/account/manage-users") 
+  } else {
+    req.flash("notice", "Error resetting password.")
+    res.redirect("/account/manage-users")
+  }
+}
+
 
 
 module.exports = { 
@@ -387,6 +408,6 @@ module.exports = {
   buildAdminRegister,
   buildManageUsers,
   searchTextUser, 
-  updateAccountType 
-
+  updateAccountType, 
+  adminResetPassword
 }

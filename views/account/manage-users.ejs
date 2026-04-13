@@ -30,5 +30,21 @@
         <button type="submit" class="btn-update">Update Permissions</button>
       </form>
     </section>
-  <% } %>
+
+    <section class="user-reset-password">
+      <hr>
+      <div class="security-header">
+        <h4>⚠️ Security Zone</h4>
+        <p>Resetting the password will set it to: <code class="temp-pass">Password123!</code></p>
+      </div>
+      
+      <form id="resetForm" action="/account/admin-reset-password" method="post">
+        <input type="hidden" name="account_id" value="<%= user.account_id %>">
+        <button type="submit" class="btn-reset-confirm">
+          Confirm Password Reset
+        </button>
+      </form>
+    </section>
+    <% } %>
+  
 </main>
