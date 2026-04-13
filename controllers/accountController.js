@@ -34,7 +34,17 @@ async function buildRegister(req, res, next) {
 * *************************************** */
 async function registerAccount(req, res) {
   let nav = await utilities.getNav()
-  const { account_firstname, account_lastname, account_email, account_password } = req.body
+  
+  const { 
+    account_firstname, 
+    account_lastname, 
+    account_email, 
+    account_password, 
+    account_type, 
+    admin_action 
+  } = req.body
+
+  const finalRole = admin_action ? account_type : 'Client'
 
   let hashedPassword
   try {
@@ -42,12 +52,13 @@ async function registerAccount(req, res) {
   } catch (error) {
     req.flash("notice", "Sorry, there was an error processing the registration.")
     return res.status(500).render("account/register", {
-      title: "Registration",
+      title: admin_action ? "Register Staff Member" : "Registration",
       nav,
       errors: null,
       account_firstname,
       account_lastname,
       account_email,
+      isAdminCreating: admin_action ? true : false,
     })
   }
 
@@ -55,10 +66,16 @@ async function registerAccount(req, res) {
     account_firstname,
     account_lastname,
     account_email,
-    hashedPassword
+    hashedPassword,
+    finalRole 
   )
 
   if (regResult) {
+    if (admin_action) {
+      req.flash("notice", `Staff member ${account_firstname} registered as ${finalRole}.`)
+      return res.redirect("/account/")
+    }
+
     req.flash(
       "notice",
       `Congratulations, you're registered ${account_firstname}. Please log in.`
@@ -71,12 +88,13 @@ async function registerAccount(req, res) {
   } else {
     req.flash("notice", "Sorry, the registration failed.")
     res.status(501).render("account/register", {
-      title: "Registration",
+      title: admin_action ? "Admin: Register Staff Member" : "Registration",
       nav,
       errors: null,
       account_firstname,
       account_lastname,
       account_email,
+      isAdminCreating: admin_action ? true : false,
     })
   }
 }
@@ -269,7 +287,7 @@ async function buildWishlistView(req, res, next) {
 }
 
 /* ****************************************
- * Process Remove from Wishlist (POST)
+ * Process Remove from Wishlist 
  * *************************************** */
 async function removeFavorite(req, res) {
   const { wishlist_id } = req.body
@@ -282,6 +300,75 @@ async function removeFavorite(req, res) {
   }
   res.redirect("/account/wishlist")
 }
+
+/* ****************************************
+ * Deliver Admin Registration View
+ * *************************************** */
+async function buildAdminRegister(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("account/register", {
+    title: "Register Staff Member", 
+    nav,
+    errors: null,
+    isAdminCreating: true, 
+  })
+}
+
+/* ****************************************
+ * Deliver Manage Users Search View
+ * *************************************** */
+async function buildManageUsers(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("account/manage-users", {
+    title: "Manage User Roles",
+    nav,
+    errors: null,
+    user: null, 
+  })
+}
+
+/* ****************************************
+ * Process Search User by Email
+ * *************************************** */
+async function searchTextUser(req, res) {
+  let nav = await utilities.getNav()
+  const { account_email } = req.body
+  const userData = await accountModel.getAccountByEmail(account_email)
+
+  if (!userData) {
+    req.flash("notice", "No user found with that email.")
+    return res.status(400).render("account/manage-users", {
+      title: "Manage User Roles",
+      nav,
+      errors: null,
+      user: null,
+    })
+  }
+
+  res.render("account/manage-users", {
+    title: "Manage User Roles",
+    nav,
+    errors: null,
+    user: userData, 
+  })
+}
+
+/* ****************************************
+ * Process Update Account Type 
+ * *************************************** */
+async function updateAccountType(req, res) {
+  const { account_id, account_type } = req.body
+  const result = await accountModel.updateAccountType(account_id, account_type)
+
+  if (result) {
+    req.flash("notice", "The user role has been updated successfully.")
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the role update failed.")
+    res.redirect("/account/manage-users")
+  }
+}
+
 
 
 module.exports = { 
@@ -296,5 +383,10 @@ module.exports = {
   accountLogout, 
   addFavorite,
   buildWishlistView, 
-  removeFavorite 
+  removeFavorite,
+  buildAdminRegister,
+  buildManageUsers,
+  searchTextUser, 
+  updateAccountType 
+
 }

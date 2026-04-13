@@ -1,37 +1,53 @@
 <main class="account-management">
-  <h1>Account Management</h1>
-
+  <h1 class="management-title">Account Management</h1>
   <%- messages() %>
 
-  <% if (accountData.account_type === "Employee" || accountData.account_type === "Admin") { %>
-    <h2>Welcome <%= accountData.account_firstname %></h2>
-  <% } else { %>
-    <p class="welcome-msg">Welcome <%= accountData.account_firstname %></p>
-  <% } %>
-  
-  <p>You're logged in</p>
+  <div class="dashboard-wrapper">
+    <aside class="dashboard-sidebar">
+      <div class="user-info-card">
+        <div class="avatar-circle">
+          <%= accountData.account_firstname[0] %><%= accountData.account_lastname[0] %>
+        </div>
+        <p class="user-name"><strong><%= accountData.account_firstname %></strong></p>
+        <span class="user-role-label"><%= accountData.account_type %></span>
+      </div>
 
-  <section class="account-update">
-    <p>
-      <a href="/account/update/<%= accountData.account_id %>" title="Click to update account information">
-        Update Account Information
-      </a>
-    </p>
-  </section>
+      <div class="dash-nav-container">
+        <ul class="dash-menu-list">
+          <li><a href="/account/update/<%= accountData.account_id %>" class="dash-item">⚙️ Settings</a></li>
+          <li><a href="/account/wishlist" class="dash-item">⭐ My Garage</a></li>
+          
+          <% if (accountData.account_type === "Admin") { %>
+            <li class="dash-section-header">Admin Tools</li>
+            <li><a href="/account/admin-register" class="dash-item">🆕 Register Staff</a></li>
+            <li><a href="/account/manage-users" class="dash-item">👥 User Roles</a></li>
+          <% } %>
 
-  <section class="garage-management">
-    <h3>Member Tools</h3>
-    <p>
-      <a href="/account/wishlist" title="View your saved vehicles">⭐ View My Garage</a>
-    </p>
-  </section>
+          <% if (accountData.account_type === "Employee" || accountData.account_type === "Admin") { %>
+            <li class="dash-section-header">Inventory</li>
+            <li><a href="/inv" class="dash-item">🚘 Management</a></li>
+          <% } %>
+          
+        </ul>
+      </div>
+    </aside>
 
-  <% if (accountData.account_type === "Employee" || accountData.account_type === "Admin") { %>
-    <section class="inventory-management">
-      <h3>Inventory Management</h3>
-      <p>
-        <a href="/inv" title="Click to manage inventory">Manage Inventory</a>
-      </p>
+    <section class="dashboard-content">
+      <div class="welcome-header">
+        <h2>Welcome back, <%= accountData.account_firstname %>!</h2>
+        <p>Select an option from the menu to manage your account or tools.</p>
+      </div>
+
+      <div class="info-cards-container">
+        <div class="info-card">
+          <span class="card-label">Account Type</span>
+          <p class="card-value"><%= accountData.account_type %></p>
+        </div>
+        <div class="info-card">
+          <span class="card-label">Email Address</span>
+          <p class="card-value"><%= accountData.account_email %></p>
+        </div>
+      </div>
     </section>
-  <% } %>
+  </div>
 </main>

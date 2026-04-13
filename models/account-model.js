@@ -3,15 +3,15 @@ const pool = require("../database/")
 /* *****************************
 *   Register new account
 * *************************** */
-async function registerAccount(account_firstname, account_lastname, account_email, account_password){
+async function registerAccount(account_firstname, account_lastname, account_email, account_password, account_type){
   try {
     const sql = `
       INSERT INTO account 
       (account_firstname, account_lastname, account_email, account_password, account_type) 
-      VALUES ($1, $2, $3, $4, 'Client') 
+      VALUES ($1, $2, $3, $4, $5) -- Cambiamos 'Client' por $5
       RETURNING *
     `
-    return await pool.query(sql, [account_firstname, account_lastname, account_email, account_password])
+    return await pool.query(sql, [account_firstname, account_lastname, account_email, account_password, account_type])
   } catch (error) {
     console.error("Error registering account:", error)
     throw error
@@ -85,5 +85,18 @@ async function updatePassword(account_password, account_id) {
   }
 }
 
+/* *****************************
+* Update account type (Admin only)
+* ***************************** */
+async function updateAccountType(account_id, account_type) {
+  try {
+    const sql = "UPDATE account SET account_type = $1 WHERE account_id = $2 RETURNING *"
+    const data = await pool.query(sql, [account_type, account_id])
+    return data.rows[0]
+  } catch (error) {
+    return error.message
+  }
+}
 
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePassword }
+
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePassword, updateAccountType }

@@ -1,0 +1,34 @@
+<main class="manage-users-view">
+  <h1 class="title"><%= title %></h1>
+
+  <%- messages() %>
+
+  <section class="search-area">
+    <p>Search for a user by their exact email address to change their permissions.</p>
+    <form action="/account/manage-users/search" method="post">
+      <label for="account_email">User Email:</label>
+      <input type="email" name="account_email" id="account_email" required placeholder="example@mail.com">
+      <button type="submit">Search User</button>
+    </form>
+  </section>
+
+  <% if (user) { %>
+    <section class="user-result">
+      <hr>
+      <h3>User Found:</h3>
+      <p><strong>Name:</strong> <%= user.account_firstname %> <%= user.account_lastname %></p>
+      <p><strong>Current Role:</strong> <%= user.account_type %></p>
+
+      <form action="/account/update-role" method="post">
+        <input type="hidden" name="account_id" value="<%= user.account_id %>">
+        <label for="account_type">Change Role to:</label>
+        <select name="account_type" id="account_type">
+          <option value="Client" <%= user.account_type === 'Client' ? 'selected' : '' %>>Client</option>
+          <option value="Employee" <%= user.account_type === 'Employee' ? 'selected' : '' %>>Employee</option>
+          <option value="Admin" <%= user.account_type === 'Admin' ? 'selected' : '' %>>Admin</option>
+        </select>
+        <button type="submit" class="btn-update">Update Permissions</button>
+      </form>
+    </section>
+  <% } %>
+</main>

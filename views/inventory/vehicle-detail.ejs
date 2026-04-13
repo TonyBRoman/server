@@ -1,0 +1,9 @@
+<% if (locals.loggedin) { %>
+  <form action="/account/wishlist/add" method="post" class="wishlist-form">
+    <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
+    <input type="hidden" name="account_id" value="<%= locals.accountData.account_id %>">
+    <button type="submit" class="btn-wishlist">⭐ Add to My Garage</button>
+  </form>
+<% } else { %>
+  <p class="login-prompt"><a href="/account/login">Login</a> to add this vehicle to your garage!</p>
+<% } %>

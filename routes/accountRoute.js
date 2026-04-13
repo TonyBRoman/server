@@ -68,4 +68,12 @@ router.get("/wishlist", utilities.checkLogin, utilities.handleErrors(accountCont
 
 router.post("/wishlist/remove", utilities.checkLogin, utilities.handleErrors(accountController.removeFavorite))
 
+router.get("/admin-register", utilities.checkLogin, utilities.handleErrors(accountController.buildAdminRegister))
+
+router.get("/manage-users", utilities.checkLogin, utilities.handleErrors(accountController.buildManageUsers))
+
+router.post("/manage-users/search", utilities.checkLogin, utilities.handleErrors(accountController.searchTextUser))
+
+router.post("/update-role", utilities.checkLogin, utilities.handleErrors(accountController.updateAccountType))
+
 module.exports = router
